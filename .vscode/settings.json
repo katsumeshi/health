@@ -1,0 +1,7 @@
+{
+  "ruby.format": true,
+  "editor.formatOnSave": true,
+  "beautify.language": {
+    "html": ["erb"]
+  }
+}
