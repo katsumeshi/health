@@ -1,11 +1,15 @@
 class CalcController < ApplicationController
-  def new
-    @calc = Calc.new
-  end
 
-  def create
+  def index
+    @calc = Calc.new(height: "",
+                     weight: "")
+  end
+  
+  def calc
     @calc = Calc.new(calc_params)
-    puts @calc.calc
+    @calc.calc
+    render :index
+
   end
 
   private

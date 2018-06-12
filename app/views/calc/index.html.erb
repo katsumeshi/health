@@ -24,72 +24,67 @@
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col">
-        <h5>結果</h5>
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">範囲</th>
-              <th scope="col">肥満度</th>
-              <th scope="col">適正体重</th>
-              <th scope="col">適正体重より</th>
-              <th scope="col">BMI</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-          </tbody>
-        </table>
+    <% if @calc.bmi %>
+      <div class="row">
+        <div class="col">
+          <h5>結果</h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">範囲</th>
+                <th scope="col">肥満度</th>
+                <th scope="col">適正体重</th>
+                <th scope="col">適正体重より</th>
+                <th scope="col">BMI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <%= @calc.bmi_rate[@calc.range_index] %>
+                </td>
+                <td>
+                  <%= @calc.obesity_rate[@calc.range_index] %>
+                </td>
+                <td>
+                  <%= @calc.proper_weight %>
+                </td>
+                <td style="color:<%= @calc.diff_from_proper_weight > 0 ? 'red' : 'blue' %>">
+                  <%= @calc.diff_from_proper_weight %>
+                </td>
+                <td>
+                  <%= @calc.bmi %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <h5> 日本肥満学会の判定基準(成人) </h5>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">指標</th>
-              <th scope="col">判定</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>18.5未満</td>
-              <td>低体重(痩せ型)</td>
-            </tr>
-            <tr>
-              <td>18.5～25未満</td>
-              <td>普通体重</td>
-            </tr>
-            <tr>
-
-              <td>25～30未満</td>
-              <td>肥満（１度）</td>
-            </tr>
-            <tr>
-              <td>30～35未満</td>
-              <td>肥満（２度）</td>
-            </tr>
-            <tr>
-              <td>35～40未満</td>
-              <td>肥満（３度）</td>
-            </tr>
-            <tr>
-              <td>40以上</td>
-              <td>肥満（４度）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <% end %>
+        <div class="row">
+          <div class="col">
+            <h5> 日本肥満学会の判定基準(成人) </h5>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">指標</th>
+                  <th scope="col">判定</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% (0..@calc.rate_count-1).each do |i| %>
+                  <tr style="background-color:<%= i == @calc.range_index ? '#FA8072' : '' %>">
+                    <td>
+                      <%= @calc.bmi_rate[i] %>
+                    </td>
+                    <td>
+                      <%= @calc.obesity_rate[i] %>
+                    </td>
+                  </tr>
+                  <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
   </div>
 </div>
