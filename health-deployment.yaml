@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: health 
-        image: localhost:5000/katsumeshi/health:v0.1.0
+        image: registry.gitlab.com/katsumeshi/health:v0.1.0
         ports:
           - containerPort: 3000
         command: ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
